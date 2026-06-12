@@ -1,0 +1,51 @@
+% \todo[inline]{cada oración dice algo importante}
+% \todo[inline]{oración de contexto: importancia de VI en XR}
+
+%En aplicaciones de realidad extendida (XR) es indispensable que el sistema de localización del dispositivo sea robusto frente a movimientos bruscos y oclusiones en las cámaras. A su vez para que la experiencia de usuario sea fluida e inmersiva debe ser liviano para que pueda correr en tiempo real. Los dispositos XR, como los cascos de realidad virtual (VR), combinan múltiples cámaras e IMU que pueden ser usados por métodos de Odometría Visual-Inercial (VIO) para estimar su localización. 
+
+% \todo[inline]{una o dos oraciones que describan el método brevemente}
+%En este paper se propone un sistema VIO capaz de estimar la localización de dispositivos XR. El sistema propuesto tiene como punto de partida al algoritmo de Basalt, con lo cual mantiene una ventana de keyframes que optimiza y marginaliza de forma inteligente para mantener el sistema computacionalmente eficiente, y la vez lo extiende permitiendo trabajar con cascos con más de dos cámaras no paralelas, utiliza la IMU para predecir la localización y es capaz de reidentificar features perdidas por oclusiones o movimientos bruscos.
+%\todo[inline]{BRUNO: Agregar comentario recall} 
+% Keyframes y landmarks son almacenados en un mapa persistente que es utilizado luego para reconocer lugares previamente visitados. 
+
+%\todo[inline]{COMPLETAR: Una oración de experimentos y resultados.}
+%Se realizaron experimentos sobre un dataset de un casco de XR para validar el sistema VIO desarrollado. Los resultados muestran que el sistema logra una mayor robustez y precisión, y una trayectoria suave, requerimientos necesarios para aplicaciones XR.
+
+% also add smart map management
+%We present an efficient visual-inertial SLAM system that extends the Basalt visual-inertial odometry framework with persistent map management, real-time loop closure and large-scale optimization capabilities. Our approach integrates a lightweight loop closure module inspired by keyframe-based visual SLAM methods with the Basalt VIO front-end, enabling global consistency without sacrificing real-time performance. For global optimization, we adapt the RootBA formulation to support stereo and fisheye camera models with arbitrary calibration, providing numerically stable and hardware-friendly bundle adjustment suitable for large-scale maps. The resulting system combines the robustness and drift resistance of Basalt's visual-inertial front-end with the efficiency of square root bundle adjustment, achieving superior trajectory consistency and scalability. We evaluate on the EuRoC, TUM-VI, and Monado datasets, where our method achieves state-of-the-art absolute trajectory error in the indoor sequences and real-time performance, superior to other alternatives.
+
+%Los sistemas de localización y mapeo visual-inercial deben operar en tiempo real sobre
+%plataformas con recursos computacionales y energéticos estrictamente acotados, sin
+%comprometer la precisión ni la robustez ante condiciones desafiantes.
+%Los sistemas VIO del estado del arte logran performance en tiempo real pero acumulan \textit{drift} sin posibilidad de corrección global; los sistemas VI-SLAM existentes, por su parte,
+%presentan dificultades para garantizar operación en tiempo real en escenarios típicos de
+%robótica y VR/AR.
+%En este trabajo presentamos un sistema de VI-SLAM eficiente que
+%extiende el algoritmo de VIO Basalt con gestión de mapa
+%persistente, detección y cierre de ciclos en tiempo real, y optimización a gran escala.
+%El sistema incorpora un módulo de \textit{loop closure} liviano basado en HashBoW con
+%arquitectura asíncrona, que permite la corrección global del \textit{drift} sin degradar
+%la performance del front-end. Para la optimización global, adaptamos la formulación de
+%RootBA para soportar sistemas multicámara con modelos de cámara arbitrarios, proveyendo un bundle adjustment numéricamente estable y
+%ejecutable con precisión simple.
+%Evaluamos el sistema en los datasets EuRoC, TUM-VI y
+%Monado, donde el método propuesto alcanza un error de trayectoria absoluta
+%del estado del arte en secuencias de interior, mantiene operación en
+%tiempo real incluso en trayectorias de extensa duración, y demuestra robustez en
+%condiciones desafiantes como escenas con baja textura gracias al front-end de Basalt.
+
+
+Los sistemas VI-SLAM deben operar en tiempo real sobre plataformas con recursos
+computacionales y energéticos estrictamente acotados, sin comprometer precisión ni
+robustez. Los sistemas VIO del estado del arte logran rendimiento en tiempo real pero
+acumulan \textit{drift} sin posibilidad de corrección global; los sistemas VI-SLAM
+existentes, por su parte, presentan dificultades para garantizar operación en tiempo
+real en escenarios típicos de robótica y realidad virtual/aumentada (VR/AR). En este trabajo presentamos un sistema VI-SLAM eficiente que extiende el algoritmo de VIO de Basalt con mapa persistente, detección y cierre de ciclos en tiempo real, y optimización a gran escala. El sistema
+incorpora un módulo de \textit{loop closure} liviano basado en HashBoW con arquitectura
+asíncrona, que corrige el \textit{drift} global sin degradar el rendimiento del
+front-end, y adapta la formulación de RootBA para soportar sistemas multicámara con
+modelos de cámara arbitrarios, proveyendo un bundle adjustment numéricamente estable y
+ejecutable con precisión simple. Evaluamos este sistema en los datasets EuRoC, TUM-VI y Monado,
+donde el método alcanza un error de trayectoria absoluta del estado del arte en secuencias
+de interior, mantiene operación en tiempo real en trayectorias de extensa duración, y
+demuestra robustez en condiciones desafiantes gracias al front-end de Basalt.

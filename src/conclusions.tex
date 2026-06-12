@@ -1,0 +1,8 @@
+En este trabajo presentamos un sistema VI-SLAM robusto, preciso y de tiempo real, construido sobre Basalt y BasaltXR. Nuestras contribuciones principales son la extensión de Basalt con un mapa persistente para asociación de datos a largo plazo, y una técnica de bundle adjustment que optimiza el mapa global de forma eficiente.
+
+Los resultados experimentales validan estas afirmaciones. El sistema mantiene la operación en tiempo real de Basalt incluso tras convertirlo en un sistema VI-SLAM completo, gracias a una arquitectura asíncrona que aísla las operaciones costosas del mapa del resto del pipeline. Comparado con sistemas VI-SLAM de bajos requisitos computacionales, es el más eficiente. En cuanto a precisión, es comparable con el estado del arte, con especial fortaleza en entornos cerrados, típicos de VR/AR. Finalmente, la técnica de bundle adjustment propuesta es numéricamente estable, lo que permite operar en precisión simple con una mejora sustancial de rendimiento.
+
+Como trabajo futuro se proponen las siguientes líneas: integrar la optimización de bundle adjustment en el mapa persistente para que se ejecute de manera frecuente y online; incorporar términos de la IMU en la optimización global; mejorar la eficiencia y robustez de la asociación de datos a mediano plazo, en particular mediante la reintroducción de keyframes a la ventana del back-end; y fortalecer las verificaciones de consistencia en la detección de ciclos, para habilitarlas en entornos más desafiantes y con un menor número de correspondencias.
+
+% también mejorar el culling
+% mejorar la calidad del mapa

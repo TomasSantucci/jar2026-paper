@@ -1,0 +1,55 @@
+%\subsection{Visual SLAM}
+%\label{subsec:visual_slam}
+
+%Los fundamentos del SLAM moderno fueron establecidos por Davison et al. con
+%\textbf{MonoSLAM}~\cite{davison2007monoslam}, el primer sistema monocular en
+%tiempo real basado en EKF, y por Klein y Murray con
+%\textbf{PTAM}~\cite{klein2007parallel}, que introdujo la separación entre
+%seguimiento y mapeo en hilos paralelos, estableciendo el patrón arquitectónico
+%de los sistemas posteriores basados en fotogramas clave.
+
+%Engel et al. propusieron \textbf{LSD-SLAM}~\cite{engel2014lsd}, el primer
+%sistema directo de gran escala, que opera sobre intensidades de píxeles en
+%lugar de características extraídas explícitamente.
+%Esta línea de métodos directos fue extendida por \textbf{SVO}~\cite{forster2014svo},
+%que combina seguimiento directo con optimización del error de reproyección,
+%por \textbf{DSO}~\cite{engel2018dso}, que formula la odometría directa
+%sobre una ventana deslizante con calibración fotométrica conjunta, y por
+%\textbf{DSM}~\cite{zubizarreta2020dsm}, que añade cierre de bucles al
+%\emph{pipeline} directo.
+%En paralelo, \textbf{ORB-SLAM2}~\cite{mur2017orbslam2} llevó los métodos
+%basados en características a su madurez, incorporando cierre de bucles y
+%relocalización robusta mediante vocabulario visual, convirtiéndose en la
+%referencia principal de los sistemas indirectos.
+
+A continuación se revisan los trabajos más relevantes en odometría y SLAM visual-inercial, organizados según el tipo de método empleado.
+
+\subsection{Métodos basados en filtros}
+
+Los primeros enfoques para la odometría visual-inercial se apoyaron en la teoría de filtros de Kalman para estimar la pose del dispositivo.
+
+MSCKF~\cite{mourikis2007msckf} propuso un algoritmo basado en un filtro de Kalman extendido (EKF) para sistemas VIO. Su contribución principal fue eliminar las posiciones 3D de los puntos del vector de estado, logrando una complejidad computacional lineal en el número de \textit{features} observados.
+ROVIO~\cite{bloesch2015rovio} adoptó un enfoque alternativo mediante un filtro de Kalman extendido iterativo (IEKF), utilizando el error fotométrico sobre parches de imagen como medición.
+
+\subsection{Métodos basados en optimización de mínimos cuadrados}
+
+A diferencia de los métodos basados en filtros, la optimización de mínimos cuadrados en ventana deslizante demostró mayor precisión y eficiencia computacional. Tras consolidarse en sistemas de SLAM visual como PTAM~\cite{klein2007ptam} y ORB-SLAM~\cite{mur2015orbslam}, se estableció como el paradigma predominante en VI-SLAM.
+
+OKVIS~\cite{leutenegger2015okvis} fue uno de los primeros sistemas en formular la fusión visual-inercial como un problema de mínimos cuadrados no lineales en ventana deslizante, acoplando errores de reproyección y preintegración de la IMU.
+VINS-Fusion~\cite{qin2019vinsfusion} es un sistema de VI-SLAM estéreo con \textit{loop closure} mediante DBoW2, optimización de grafo de poses y fusión de mapa. Su \textit{tracking} está basado en KLT e introduce soporte para múltiples sensores mediante una formulación generalizada de la optimización.
+Basalt~\cite{usenko2020basalt} es un método de VIO basado en optimización de keyframes. En el \textit{front-end} emplea FAST~\cite{rosten2006fast} para la detección de \textit{features} y \textit{optical flow} por KLT~\cite{lucasIterativeImageRegistration1981} para el tracking. El \textit{back-end} optimiza una ventana de keyframes con una heurística de marginalización que mantiene la eficiencia computacional: cada vez que un keyframe es removido, se calcula un término de marginalización que se incorpora en la siguiente optimización. Adicionalmente, los datos marginalizados por el VIO se procesan de manera \textit{offline} para construir un mapa global y recuperar nuevas correspondencias entre puntos, que son luego refinadas mediante \textit{Bundle Adjustment} global sobre todas las poses y landmarks.
+Kimera~\cite{rosinol2020kimera} es un sistema de \textit{metric-semantic} VI-SLAM que incorpora loop closure mediante DBoW2 y optimización de grafo de poses, alcanzando una precisión similar a VINS-Fusion. A diferencia de los sistemas tradicionales, integra además reconstrucción de malla y etiquetado semántico en 3D.
+ORB-SLAM3~\cite{campos2021orbslam3} unificó múltiples modalidades de entrada con soporte para IMU, asociación de datos a corto, mediano y largo plazo, y un sistema de mapas Atlas para gestionar mapas desconectados. Se ha consolidado como uno de los sistemas VI-SLAM más precisos y ampliamente adoptados en la literatura.
+OKVIS2~\cite{leutenegger2022okvis2} extiende OKVIS incorporando un mapa persistente con \textit{loop closure} y marginalización eficientes, manteniéndose entre los sistemas de mayor precisión del estado del arte en benchmarks estándar como EuRoC y TUM-VI.
+%\textbf{DM-VIO}~\cite{stumberg2022dmvio} adaptó el enfoque directo de DSO al entorno VI mediante marginalización retardada.
+Snake-SLAM~\cite{ruckert2021snakeslam} propuso una optimización desacoplada que resuelve el estado de la IMU y el bundle adjustment visual como subproblemas independientes, reduciendo la complejidad computacional sin sacrificar precisión.
+Basalt-XR~\cite{zanotti2024basaltxr} extiende Basalt al contexto de VR/AR, incorporando la posibilidad de asociar datos a mediano plazo mediante un mapa persistente que reintroduce keyframes en la ventana local del back-end.
+
+En resumen, sistemas como OKVIS2 y ORB-SLAM3 obtienen la mayor precisión en el estado del arte, según evaluaciones como~\cite{krishnan2025lamaria} y~\cite{leutenegger2022okvis2}. Sin embargo, en entornos de VR/AR estos sistemas no logran ser robustos o no cumplen con los límites de tiempo de procesamiento para la operación en tiempo real~\cite{collabora2023dataset}. En contraste, Basalt es un sistema de VIO robusto que, aun sin utilizar información de un mapa persistente, alcanza métricas de precisión prometedoras y un rendimiento más eficiente que el resto.
+
+\subsection{Métodos basados en aprendizaje}
+\label{subsec:learning_based}
+
+Trabajos recientes han explorado el uso de redes neuronales en el \emph{pipeline} de SLAM, como DROID-SLAM~\cite{teed2021droid} y Deep Patch Visual SLAM~\cite{lipson2024dpvslam}, este último superador en velocidad frente a sus predecesores.
+Si bien estos enfoques han alcanzado precisión del estado del arte, aún se encuentran en consolidación.
+En contraste, el sistema propuesto en este trabajo es más ligero computacionalmente, no requiere entrenamiento supervisado y resulta más adecuado para plataformas con recursos restringidos.

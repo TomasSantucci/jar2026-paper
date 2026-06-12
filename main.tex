@@ -1,0 +1,126 @@
+    \documentclass[conference]{IEEEtran}
+%\usepackage[spanish]{babel} % Obligatorio para papers en Español de JAR 2017
+%\usepackage[spanish,es-tabla]{babel} % Cambia Cuadro por Tabla (OK en Linux & Overleaf)
+
+\usepackage[spanish,es-tabla]{babel} % para acentos en español
+\usepackage[utf8]{inputenc} % para poder copiar acentos desde el pdf
+\usepackage[T1]{fontenc} % para poder copiar acentos desde el pdf
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{graphicx}
+\usepackage[hidelinks]{hyperref} % to use \href{} command
+\usepackage[caption=false]{subfig}
+\usepackage{xcolor}
+\usepackage{graphics} % for pdf, bitmapped graphics files
+\usepackage{epsfig} % for postscript graphics files
+\usepackage{color}
+\usepackage{booktabs} % \toprule \midrule
+\usepackage{threeparttable}
+\usepackage[per-mode=symbol]{siunitx} % to handle units
+\usepackage{todonotes} % to add notes
+\usepackage{tabularx} % INTENTAR REMOVERLO
+\usepackage{comment}
+
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+% Color commands for annotations
+\newcommand\TODO[1]{\textbf{\textcolor{red}{#1}}} %  TODO notes
+\newcommand\REVISION[1]{\textbf{\textcolor{blue}{#1}}} %  TODO notes
+
+\newcommand{\furl}[1]{\footnote{\url{#1}}}
+
+
+\DeclareSIUnit\px{px} % declare pixel unit
+\sisetup{separate-uncertainty} % for uncertainty number in siunitx
+
+\input{math_preamble}
+
+\begin{document}
+%
+% paper title
+% Titles are generally capitalized except for words such as a, an, and, as,
+% at, but, by, for, in, nor, of, on, or, the, to and up, which are usually
+% not capitalized unless they are the first or last word of the title.
+% Linebreaks \\ can be used within to get better formatting as desired.
+% Do not put math or special symbols in the title.
+%\title{Fusión de sensores de robot desmalezador en entorno simulado}
+%\title{Lightweight VI-SLAM with Asynchronous Loop Closure and Square Root Global Bundle Adjustment}
+\title{VI-SLAM Liviano con Cierre de Ciclos Asíncrono y Bundle Adjustment Global por Factorización QR}
+
+% TODO: sacar los autores para la primer entrega del paper
+%\author{\IEEEauthorblockN{1\textsuperscript{st} Tomás Santucci}
+%\IEEEauthorblockA{\textit{Departamento de Ciencias de la Computación} \\
+%\textit{FCEIA-UNR}\\
+%Rosario, Argentina\\
+%tomassantucci0@gmail.com}
+%\and
+%\IEEEauthorblockN{2\textsuperscript{nd} Mateo De Mayo}
+%\IEEEauthorblockA{
+%\textit{Technical University of Munich}\\
+%Munich, Alemania\\
+%mateo.demayo@tum.de}
+%\and
+%\IEEEauthorblockN{3\textsuperscript{rd} Taihú Pire}
+%\IEEEauthorblockA{\textit{CIFASIS} \\
+%\textit{CONICET-UNR}\\
+%Rosario, Argentina \\
+%pire@cifasis-conicet.gov.ar}
+%}
+\author{\vspace{5\baselineskip}}
+
+% make the title area
+\maketitle
+
+% As a general rule, do not put math, special symbols or citations
+% in the abstract
+\begin{abstract}
+\input{src/abstract.tex}
+\end{abstract}
+
+\begin{IEEEkeywords}
+Visual-Inertial SLAM, Loop Closure, Global Consistency, Bundle Adjustment
+\end{IEEEkeywords}
+
+% For peerreview papers, this IEEEtran command inserts a page break and
+% creates the second title. It will be ignored for other modes.
+\IEEEpeerreviewmaketitle
+
+\section{Introducción}
+\label{sec:introduction}
+\input{src/intro.tex}
+
+\section{Trabajo Relacionado}
+\label{sec:related}
+\input{src/related.tex}
+
+\section{Método propuesto}
+\label{sec:method}
+\input{src/method.tex}
+
+\section{Experimentos}
+\label{sec:experiments}
+\input{src/experiments.tex}
+
+\section{Conclusiones y trabajo futuro}
+\label{sec:conclusions}
+\input{src/conclusions.tex}
+
+%\section{Apéndice}
+%\label{sec:appendix}
+%\input{src/appendix.tex}
+
+\section*{Agradecimientos}
+\input{src/acknowledgment.tex}
+
+\bibliographystyle{IEEEtran}
+\bibliography{biblio}
+
+\end{document}
+
+
