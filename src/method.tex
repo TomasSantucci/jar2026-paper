@@ -5,7 +5,7 @@
     \label{fig:system-pipeline}
 \end{figure}
 
-En este trabajo, presentamos una serie de funcionalidades en Basalt (ver Figura \ref{fig:system-pipeline}) que lo transforman en un sistema VI-SLAM con precisión comparable al estado del arte. Tomamos como punto de partida BasaltXR \cite{zanotti2024basaltxr}, que a su vez extiende la versión de Basalt utilizada en \cite{collabora2023dataset}.
+En este trabajo, presentamos una serie de funcionalidades en Basalt (ver Figura \ref{fig:system-pipeline}) que lo transforman en un sistema VI-SLAM con precisión comparable al estado del arte. Tomamos como punto de partida BasaltXR \cite{zanotti2024basaltxr}, que a su vez extiende la versión de Basalt utilizada en \cite{demayo2025monadoslamdataset}.
 Las mejoras están diseñadas para aumentar la precisión del sistema mediante el uso de información del mapa, manteniendo la eficiencia característica de Basalt.
 
 \subsection{Mapa Persistente}
@@ -22,7 +22,7 @@ Se introdujo un componente \texttt{LoopClosing} en un thread separado que recibe
 Para la detección de candidatos a cierre de ciclo se emplea HashBoW \cite{hashbow2024stricker}, el esquema de bag of words más rápido entre sus alternativas. Para cada keyframe, se computan descriptores ORB sobre los keypoints detectados y se construye el correspondiente vector de bag of words, con el que se consulta la base de datos.
 Dado que estos métodos suelen producir un gran número de falsos positivos, los candidatos obtenidos pasan por una serie de validaciones de consistencia. Entre ellas, se realiza matching a fuerza bruta y reproyecciones de landmarks para establecer correspondencias 3D--2D. Finalmente se ejecuta una validación geométrica mediante gP3P \cite{kneip2013gp3p} con la librería OpenGV \cite{kneip2022opengv}.
 
-Al detectarse un ciclo, se notifica al mapa persistente. En función del drift estimado, el mapa decide entre dos acciones: si el drift es menor a 10 cm, simplemente fusiona los landmarks validados como inliers; en caso contrario, se ejecuta una optimización global y luego la fusión. Para ello, el mapa genera una copia de las poses de todos los keyframes y la envía al thread de loop closure junto con el árbol de expansión, las aristas de alta covisibilidad y de ciclos previos. Con esta información, se construye un grafo de poses y se optimiza mediante \textit{Pose Graph Optimization}. Finalmente, el thread de loop closing devuelve las poses corregidas al mapa persistente para su sincronización.
+Al detectarse un ciclo, se notifica al mapa persistente. En función del drift estimado, el mapa decide entre dos acciones: si el drift es menor a 10 cm, simplemente fusiona los landmarks validados como inliers; en caso contrario, se ejecuta una optimización global y luego la fusión. Para ello, el mapa genera una copia de las poses de todos los keyframes y la envía al thread de loop closure junto con el árbol de expansión, las aristas de alta covisibilidad y de ciclos previos. Con esta información, se construye un grafo de poses y se optimiza mediante Pose Graph Optimization. Finalmente, el thread de loop closing devuelve las poses corregidas al mapa persistente para su sincronización.
 
 \subsection{Optimización Global}
 A partir del mapa resultante del sistema propuesto, así como realizan algunos sistemas VI-SLAM del estado del arte \cite{campos2021orbslam3} \cite{leutenegger2022okvis2}, es posible ejecutar una optimización global de bundle adjustment, de manera offline. El obtetivo es refinar las poses de los keyframes y posiciones de landmarks de manera conjunta.

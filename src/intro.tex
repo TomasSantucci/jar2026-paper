@@ -13,15 +13,14 @@ hardware especializado como GPUs. Los métodos de SLAM geométricos son una alte
 validada para entornos embebidos \cite{galagain2025semanticslamreadyembedded}. Sin embargo, cumplir
 con los requisitos de tiempo real sigue siendo un desafío abierto: incluso sistemas VIO del
 estado del arte presentan dificultades para garantizar robustez y procesamiento en tiempo real en
-condiciones realistas \cite{collabora2023dataset}. El desafío central es lograr precisión, eficiencia computacional y robustez, condiciones necesarias para ser desplegable en la práctica.
+condiciones realistas \cite{demayo2025monadoslamdataset}. El desafío central es lograr precisión, eficiencia computacional y robustez, condiciones necesarias para ser desplegable en la práctica.
 
 % VI-SLAM
 La odometría visual-inercial (VIO) y el VI-SLAM fusionan cámaras
 e IMU: la IMU provee estimaciones de alta frecuencia del movimiento mientras que las
 cámaras aportan información rica del entorno, permitiendo estimaciones de pose precisas y
 robustas ante condiciones desafiantes. El VI-SLAM además de estimar la localización, incorpora un mapa
-persistente que habilita la detección de ciclos (\textit{loop closure}) para corregir el
-\textit{drift} acumulado y la reutilización del mapa, capacidades esenciales para una operación prolongada.
+persistente que habilita la detección de ciclos (loop closure) para corregir el drift acumulado y la reutilización del mapa, capacidades esenciales para una operación prolongada.
 
 % OBJETIVO PRINCIPAL Y MÉTODO
 El objetivo principal de este trabajo es desarrollar un sistema de VI-SLAM que aborde las limitaciones mencionadas. El método propuesto está basado en Basalt \cite{usenko2020basalt}, un sistema VIO del estado del arte para VR/AR, y es una extensión del trabajo \cite{zanotti2024basaltxr}, al que se le incorpora un mapa persistente y múltiples mejoras detalladas en la Sección \ref{sec:method}.
