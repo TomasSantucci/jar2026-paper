@@ -7,8 +7,7 @@
 
 Presentamos nuestros experimentos para mostrar las capacidades del sistema y apoyar nuestras afirmaciones.
 Se evaluó el método propuesto frente a OKVIS2 y ORB-SLAM3, ambos ejecutados en su modo VI-SLAM
-estéreo con cierre de ciclos y optimización final de bundle adjustment, sobre tres conjuntos de
-datos: EuRoC~\cite{burri2016euroc} (11 secuencias), TUM-VI~\cite{schubert2018tum} (28 secuencias) y el Monado SLAM Dataset~\cite{demayo2025monadoslamdataset} (MSD,
+estéreo con cierre de ciclos y optimización final de bundle adjustment, sobre tres datasets públicos: EuRoC~\cite{burri2016euroc} (11 secuencias), TUM-VI~\cite{schubert2018tum} (28 secuencias) y el Monado SLAM Dataset~\cite{demayo2025monadoslamdataset} (MSD,
 64 secuencias). En todos los experimentos se evalúa la estimación no causal de la trayectoria.
 Los experimentos se realizaron en un procesador Intel Core i5-13600 con 32 GB de RAM, a excepción del experimento que compara el rendimiento del sistema propuesto contra OKVIS2 y ORB-SLAM3, que fue realizado en un procesador Intel Core Ultra 9 285H con 32 GB de RAM.
 
@@ -27,9 +26,9 @@ La Tabla~\ref{tab:sota_summary} muestra la media del ATE para cada sistema en lo
 & \textbf{Método propuesto} & \textbf{OKVIS2} & \textbf{ORB-SLAM3}\tnote{*} \\
 \midrule
 \multicolumn{4}{l}{\textit{MSD}} \\
-MI      & \textbf{0.05}  & 2.20           & 55.83          \\
-MO      & \textbf{0.21}  & 0.42           & \textbf{0.21}  \\
-MG      & \textbf{0.04}  & 0.11           & 8.25           \\
+MI (Valve Index)      & \textbf{0.05}  & 2.20           & 55.83          \\
+MO (Odyssey+)      & \textbf{0.21}  & 0.42           & \textbf{0.21}  \\
+MG (HP Reverb G2)      & \textbf{0.04}  & 0.11           & 8.25           \\
 \midrule
 \multicolumn{4}{l}{\textit{EuRoC}} \\
 Machine Hall        & 0.08           & \textbf{0.04}  & 0.05           \\

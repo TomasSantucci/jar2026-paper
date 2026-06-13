@@ -26,7 +26,7 @@ A continuación se revisan los trabajos más relevantes en odometría y SLAM vis
 
 \subsection{Métodos basados en filtros}
 
-Los primeros enfoques para la odometría visual-inercial se apoyaron en la teoría de filtros de Kalman para estimar la pose del dispositivo.
+Los primeros enfoques para odometría visual-inercial se apoyaron en la teoría de filtros de Kalman para estimar la pose del dispositivo.
 
 MSCKF~\cite{mourikis2007msckf} propuso un algoritmo basado en un filtro de Kalman extendido (EKF) para sistemas VIO. Su contribución principal fue eliminar las posiciones 3D de los puntos del vector de estado, logrando una complejidad computacional lineal en el número de \textit{features} observados.
 ROVIO~\cite{bloesch2015rovio} adoptó un enfoque alternativo mediante un filtro de Kalman extendido iterativo (IEKF), utilizando el error fotométrico sobre parches de imagen como medición.
